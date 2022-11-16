@@ -134,30 +134,15 @@ public class Main {
             jobs.voice();
         }
 
-        ArrayList<CanProgramming> devs = new ArrayList<>();
-        devs.add(dev1);
-        devs.add(dev2);
-        devs.add(dev3);
-        ArrayList<CanDrive> drivers = new ArrayList<>();
-        drivers.add(driver1);
-        drivers.add(driver2);
-        drivers.add(driver3);
-        ArrayList<CanCook> cookers = new ArrayList<>();
-        cookers.add(cheif1);
-        cookers.add(cheif2);
-        cookers.add(cheif3);
 
-        System.out.println("_________");
-        for (CanProgramming dever : devs){
-            dever.doProgramming();
-        }
-        System.out.println("_________");
-        for (CanDrive drive : drivers){
-            drive.doCarDriving();
-        }
-        System.out.println("_________");
-        for (CanCook cookeri : cookers){
-            cookeri.doCookPizza();
+        for (Jober jober : jobers) {
+            if (jober.getClass() == Driver.class){
+                ((Driver) jober).doCarDriving();
+            } else if (jober.getClass() == Cheif.class) {
+                ((Cheif) jober).doCookPizza();
+            } else if (jober.getClass() == Programmer.class){
+                ((Programmer) jober).doProgramming();
+            }
+            }
         }
     }
-}
