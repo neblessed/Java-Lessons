@@ -147,13 +147,15 @@ public class Main {
         cookers.add(cheif2);
         cookers.add(cheif3);
 
-
+        System.out.println("_________");
         for (CanProgramming dever : devs){
             dever.doProgramming();
         }
+        System.out.println("_________");
         for (CanDrive drive : drivers){
             drive.doCarDriving();
         }
+        System.out.println("_________");
         for (CanCook cookeri : cookers){
             cookeri.doCookPizza();
         }
