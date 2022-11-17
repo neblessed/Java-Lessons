@@ -2,8 +2,14 @@ import java.util.ArrayList;
 
 import intrface.*;
 import intrface.Jober;
+import intrface2.Counter;
+import intrface2.CounterPerson;
+import intrface2.Director;
+
 
 public class Main {
+    static boolean win = false;
+
     public static void main(String[] args) {
         Liner line = new Liner();
         System.out.println("~~~~~~~~~~~~ JAVA ROAD TO JUNIOR. Tokaev V.A. ~~~~~~~~~~~~~~~~");
@@ -130,19 +136,81 @@ public class Main {
         jobers.add(cheif2);
         jobers.add(cheif3);
 
-        for (Jober jobs : jobers){
+        for (Jober jobs : jobers) {
             jobs.voice();
         }
 
-
         for (Jober jober : jobers) {
-            if (jober.getClass() == Driver.class){
+            if (jober.getClass() == Driver.class) {
                 ((Driver) jober).doCarDriving();
             } else if (jober.getClass() == Cheif.class) {
                 ((Cheif) jober).doCookPizza();
-            } else if (jober.getClass() == Programmer.class){
+            } else if (jober.getClass() == Programmer.class) {
                 ((Programmer) jober).doProgramming();
             }
-            }
         }
+
+        line.addLine("Урок 15. Интерфейсы (часть 2). Анонимные классы");
+        Director director = new Director();
+        CounterPerson counterPerson = new CounterPerson();
+        System.out.println("Через анонимный класс будет вот так:");
+        director.force(new Counter() {
+            @Override
+            public void newReport(int months) {
+                System.out.println("Отчёт за " + months + " месяцев");
+            }
+        }, 12);
+        System.out.println("________");
+        System.out.println("Просто через метод выглядит так же, но суть в коде:");
+        director.force(counterPerson, 50);
+
+        System.out.println("\n");
+        line.addLine("Урок 1.2. Обработка исключений");
+        ArrayList<Integer> array = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            array.add(i);
+        }
+        try {
+            array.get(11);
+        } catch (Exception e) {
+            System.out.println("Выход за пределы массива.");
+        }
+
+        line.addLine("Урок 2.2. String.format(),toString() и случайные числа");
+        int randomInt = (int) (Math.random() * 100 + 1);
+        String message = String.format("Ваше случайное число %s.. Попробуйте ещё раз", randomInt);
+        System.out.println(message);
+
+        line.addLine("Урок 3.2. Многопоточное программирование");
+        int randomNumber = (int) (Math.random() * 1000);
+        System.out.println("Загаданное число: " + randomNumber);
+        Thread timer = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int i = 0;
+                try {
+                    while (!win) {
+                        System.out.println(i);
+                        i++;
+                        Thread.sleep(1000);
+                    }
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        Thread player = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int guess = (int) (Math.random() * 1000);
+                if (guess == randomNumber) {
+                    win = true;
+                    System.out.println("Я УГАДАЛ, ЭТО ЧИСЛО" + guess);
+                }
+            }
+        });
+        timer.start();
+        player.start();
     }
+}
