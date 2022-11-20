@@ -1,4 +1,26 @@
-public class Box {
+public class Box <A,B,C> {
+    private A key;
+    private B value;
+    private C valueTwo;
+
+    public Box(A key, B value, C valueTwo) {
+        this.key = key;
+        this.value = value;
+        this.valueTwo = valueTwo;
+    }
+
+    public A getKey() {
+        return key;
+    }
+
+    public B getValue() {
+        return value;
+    }
+
+    public C getValueTwo() {
+        return valueTwo;
+    }
+
     public double height;
     public double weight;
 

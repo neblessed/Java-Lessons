@@ -210,7 +210,14 @@ public class Main {
                 }
             }
         });
-        timer.start();
-        player.start();
+//        timer.start();
+//        player.start();
+
+        line.addLine("Уроек 1. Generics.");
+        Box <String,Integer,Float> boxGenerics = new Box<>("4",2,1.25f);
+        float resultik = Float.parseFloat(boxGenerics.getKey());
+        resultik = (resultik + boxGenerics.getValue() + boxGenerics.getValueTwo());
+        System.out.println("Сложить параметры при создании объекта: " + resultik);
+
     }
 }
